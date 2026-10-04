@@ -107,6 +107,8 @@ body::-webkit-scrollbar {
   padding: 12px 22px;
   opacity: 1;
   transition: opacity 0.2s;
+  display: flex;
+  justify-content: center;
 }
 
 .log-in-button:hover {

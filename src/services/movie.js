@@ -14,3 +14,22 @@ export async function getHeroMovies() {
     return [];
   }
 }
+
+export async function getSearchedMoveis(name) {
+  try {
+    const response = await fetch(
+      `https://api.kinoxii.redberryinternship.ge/api/search?q=${name}`,
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch searched movies");
+    }
+
+    const data = await response.json();
+    console.log("Searched movie fetched successfully: ", data);
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching searched movies: ", error);
+    return [];
+  }
+}

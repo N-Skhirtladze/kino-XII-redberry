@@ -33,3 +33,20 @@ export async function getSearchedMoveis(name) {
     return [];
   }
 }
+
+export async function getNowPlaying() {
+  try {
+    const response = await fetch(
+      "https://api.kinoxii.redberryinternship.ge/api/movies/now-playing",
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch 'Now Playing' movies");
+    }
+    const data = await response.json();
+    console.log("'Now Playing' movies fetched successfully:", data);
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching 'Now Playing' movies:", error);
+    return [];
+  }
+}

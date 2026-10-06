@@ -7,7 +7,7 @@
 body {
   width: 1920px;
   font-family: "Archivo", sans-serif;
-  background-color: #1e2031;
+  background-color: #070c1c;
   color: #fff;
   -ms-overflow-style: none;
 }
@@ -472,8 +472,8 @@ header {
   display: flex;
   gap: 14px;
   align-items: center;
-  transition: background-color .2s;
-  background-color: #070C1C;
+  transition: background-color 0.2s;
+  background-color: #070c1c;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -503,7 +503,7 @@ header {
 }
 
 .searched-movie-info {
-  color: #A9A9A9;
+  color: #a9a9a9;
   font-size: 12px;
   font-weight: 400;
 }
@@ -517,5 +517,196 @@ header {
 }
 
 .coming-soon {
-  color: #E27E04;
+  color: #e27e04;
+}
+
+.now-playing {
+  width: 100%;
+  height: 502px;
+  margin-top: 681px;
+  position: relative;
+  padding: 0 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.now-playing.shadow-left::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 250px;
+  height: 452px;
+  background: linear-gradient(to right, #070c1c, transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.now-playing.shadow-right::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 250px;
+  height: 452px;
+  background: linear-gradient(to left, #070c1c, transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.home-section-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-section-title {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.home-section-see-all {
+  color: #ec3013;
+  font-size: 14;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.now-playing-list {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  scrollbar-width: none;
+}
+
+.now-playing-list::-webkit-scrollbar {
+  display: none;
+}
+
+.each-now-playing-card {
+  width: 260px;
+  height: 452px;
+  padding: 16px 8px;
+  background-color: #1e2031;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px 0px var(--shadow) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  flex-shrink: 0;
+  transition: width 0.5s;
+  position: relative;
+}
+
+.each-now-playing-card:hover {
+  width: 390px;
+}
+
+.now-playing-poster {
+  width: 245px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 14px;
+  transition: width 0.5s, height 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.each-now-playing-card:hover .now-playing-poster {
+  width: 375px;
+  height: 200px;
+}
+
+.now-playing-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s;
+}
+
+.each-now-playing-card:hover .now-playing-poster img {
+  transform: scale(1.1);
+}
+
+.now-playing-detail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  height: 43px;
+  margin-top: 10px;
+}
+
+.now-playing-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.now-playing-info {
+  font-size: 12px;
+  font-weight: 400;
+  color: #a9a9a9;
+}
+
+.now-playing-age {
+  font-size: 12px;
+  width: 36px;
+  height: 21px;
+  margin-top: 7px;
+}
+
+.now-playing-card-footer {
+  width: 236px;
+  position: absolute;
+  bottom: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  transition: width .5s;
+}
+
+.each-now-playing-card:hover .now-playing-card-footer {
+  width: 366px;
+}
+
+.now-playing-price {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.now-playing-button {
+  width: 119px;
+  height: 35px;
+  background-color: #ec3013;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.now-playing-synopsis {
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  font-size: 12px;
+  color: #a9a9a9;
+  margin-top: 15px;
+  transition:
+    opacity .3s ease .3s,
+    width .2s,
+    height .2s;
+  overflow: hidden;
+}
+
+.each-now-playing-card:hover .now-playing-synopsis {
+  width: 100%;
+  height: 85px;
+  opacity: 1;
 }

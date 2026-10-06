@@ -1,7 +1,7 @@
 const EachSearchedMovie = ({ movie }) => {
   return (
     <div className="each-searched-movie">
-      <img src={movie.posterUrl} alt="" className="searched-movie-poster"/>
+      <img src={movie.posterUrl} alt="" className="searched-movie-poster" />
       <div className="searched-movie-detail">
         <p className="searched-movie-title">{movie.title}</p>
         <p className="searched-movie-info">

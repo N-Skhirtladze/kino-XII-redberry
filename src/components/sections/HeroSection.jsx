@@ -6,7 +6,7 @@ import CarouselNavigation from "../ui/CarouselNavigation";
 const HeroSection = () => {
   const [data, setData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(false);
 
   useEffect(() => {
     const fetchHeroMovies = async () => {
@@ -21,32 +21,23 @@ const HeroSection = () => {
     if (data.length === 0) return;
 
     const interval = setInterval(() => {
-      setTime((prev) => prev + 1);
-    }, 1000);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [data]);
-
-  useEffect(() => {
-    if (time === 5) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length);
-      setTime(0);
-    }
-  }, [time]);
+  }, [data, currentIndex]);
 
   return (
     <section className="hero-section">
-      <div className="for-linear"></div>
       {data.map((movie, i) => (
-        <div key={movie.id} className="each-hero-movie">
-          <img
-            src={movie?.backdropUrl}
-            alt=""
-            className="hero-image"
-            style={{ opacity: i === currentIndex ? 1 : 0 }}
-          />
+        <div
+          key={movie.id}
+          style={{ opacity: i === currentIndex ? 1 : 0 }}
+          className="each-hero-movie"
+        >
+          <img src={movie?.backdropUrl} alt="" className="hero-image" />
+          <div className="for-linear"></div>
           <HeroDescription
-            style={{ display: i === currentIndex ? "flex" : "none "}}
             title={movie.title}
             age={movie.ageRating.code}
             duration={movie.runtimeMinutes}
@@ -55,7 +46,10 @@ const HeroSection = () => {
           />
         </div>
       ))}
-      <CarouselNavigation setTime={setTime} setCurrentIndex={setCurrentIndex} index={currentIndex} />
+      <CarouselNavigation
+        setCurrentIndex={setCurrentIndex}
+        index={currentIndex}
+      />
     </section>
   );
 };

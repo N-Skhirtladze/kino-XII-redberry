@@ -529,27 +529,39 @@ header {
 
 .now-playing {
   width: 100%;
-  height: 502px;
+  height: 572px;
   margin-top: 681px;
   position: relative;
-  padding: 0 70px;
+  padding: 0 70px 40px 70px;
   display: flex;
   flex-direction: column;
   gap: 24px;
+  border-bottom: 1px solid #2a2c3d;
 }
-.now-playing.shadow-left::before {
+.now-playing.shadow-left::before,
+.now-playing.shadow-right::after {
+  height: 452px;
+}
+
+.coming-soon-section.shadow-left::before,
+.coming-soon-section.shadow-left::after {
+  height: 160px;
+}
+
+.now-playing.shadow-left::before,
+.coming-soon-section.shadow-left::before {
   content: "";
   position: absolute;
   left: 0;
   top: 50px;
   width: 250px;
-  height: 452px;
   background: linear-gradient(to right, #070c1c, transparent);
   pointer-events: none;
   z-index: 10;
 }
 
-.now-playing.shadow-right::after {
+.now-playing.shadow-right::after,
+.coming-soon-section.shadow-right::after {
   content: "";
   position: absolute;
   right: 0;
@@ -571,6 +583,7 @@ header {
 .home-section-title {
   font-size: 24px;
   font-weight: 800;
+  color: #ffffff;
 }
 
 .home-section-see-all {
@@ -589,7 +602,8 @@ header {
   scrollbar-width: none;
 }
 
-.now-playing-list::-webkit-scrollbar {
+.now-playing-list::-webkit-scrollbar,
+.coming-soon-list::-webkit-scrollbar {
   display: none;
 }
 
@@ -617,7 +631,9 @@ header {
   height: 300px;
   overflow: hidden;
   border-radius: 14px;
-  transition: width 0.5s, height 0.5s;
+  transition:
+    width 0.5s,
+    height 0.5s;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -653,17 +669,21 @@ header {
   font-weight: 800;
 }
 
-.now-playing-info {
+.now-playing-info,
+.coming-soon-info {
   font-size: 12px;
   font-weight: 400;
   color: #a9a9a9;
 }
-
 .now-playing-age {
+  margin-top: 7px;
+}
+
+.now-playing-age,
+.coming-soon-age {
   font-size: 12px;
   width: 36px;
   height: 21px;
-  margin-top: 7px;
 }
 
 .now-playing-card-footer {
@@ -674,7 +694,7 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  transition: width .5s;
+  transition: width 0.5s;
 }
 
 .each-now-playing-card:hover .now-playing-card-footer {
@@ -696,6 +716,7 @@ header {
   border-radius: 999px;
   font-size: 14px;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .now-playing-synopsis {
@@ -706,9 +727,9 @@ header {
   color: #a9a9a9;
   margin-top: 15px;
   transition:
-    opacity .3s ease .3s,
-    width .2s,
-    height .2s;
+    opacity 0.3s ease 0.3s,
+    width 0.2s,
+    height 0.2s;
   overflow: hidden;
 }
 
@@ -716,4 +737,106 @@ header {
   width: 100%;
   height: 85px;
   opacity: 1;
+}
+
+.coming-soon-section {
+  width: 100%;
+  height: 229.6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 70px 19.6px 70px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.coming-soon-list {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* before */
+
+/* after  */
+
+.each-coming-soon-card {
+  width: 470px;
+  height: 100%;
+  background-color: #1e2031;
+  border-radius: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 16px 8px;
+}
+
+.each-coming-soon-card:hover{
+  margin: -5px 0 0 -5px;
+}
+
+.each-coming-soon-card img {
+  width: 229px;
+  height: 136px;
+  border-radius: 14px;
+}
+
+.coming-soon-right-side {
+  width: 202px;
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.coming-soon-detail {
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: start;
+}
+
+.coming-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ec3013;
+}
+
+.coming-soon-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.notify-me {
+  width: 97px;
+  height: 28px;
+  border: 1px solid #a9a9a9;
+  border-radius: 999px;
+  padding: 16px 8px;
+  display: flex;
+  align-items: center;
+  gap: 1.5px;
+  justify-content: center;
+  transition: background-color .3s;
+  cursor: pointer;
+}
+
+.notify-me:hover{
+  background-color: #a9a9a963;
+}
+
+.notify-me img {
+  width: 16px;
+  height: 16px;
+}
+
+.notify-me p {
+  font-size: 12px;
+  font-weight: 600;
 }

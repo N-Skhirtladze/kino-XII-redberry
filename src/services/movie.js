@@ -50,3 +50,20 @@ export async function getNowPlaying() {
     return [];
   }
 }
+
+export async function getComingSoon() {
+  try {
+    const response = await fetch(
+      "https://api.kinoxii.redberryinternship.ge/api/movies/coming-soon",
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch 'Coming Soon' movies");
+    }
+    const data = await response.json();
+    console.log("'Coming Soon' movies fetched successfully:", data);
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching 'Coming Soon' movies:", error);
+    return [];
+  }
+}

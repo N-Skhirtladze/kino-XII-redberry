@@ -21,6 +21,27 @@ body::-webkit-scrollbar {
   height: 100%;
 }
 
+footer {
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid #2A2C3D;
+  margin-top: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 34px;
+}
+
+.footer-logo p {
+  font-size: 14px;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #A9A9A9;
+  font-weight: 400;
+}
+
 .logo {
   width: 88px;
   height: 22px;
@@ -567,7 +588,6 @@ header {
   right: 0;
   top: 50px;
   width: 250px;
-  height: 452px;
   background: linear-gradient(to left, #070c1c, transparent);
   pointer-events: none;
   z-index: 10;
@@ -620,6 +640,7 @@ header {
   flex-shrink: 0;
   transition: width 0.5s;
   position: relative;
+  cursor: pointer;
 }
 
 .each-now-playing-card:hover {
@@ -760,10 +781,6 @@ header {
   scrollbar-width: none;
 }
 
-/* before */
-
-/* after  */
-
 .each-coming-soon-card {
   width: 470px;
   height: 100%;
@@ -773,6 +790,7 @@ header {
   gap: 15px;
   align-items: center;
   padding: 16px 8px;
+  cursor: pointer;
 }
 
 .each-coming-soon-card:hover{

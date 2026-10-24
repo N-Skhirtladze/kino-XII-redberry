@@ -13,8 +13,6 @@ const SearchBar = () => {
     if (!inputValue.trim()) return;
 
     console.log("Searching for:", inputValue);
-
-    // GET request here
   };
 
   const handleChange = async (e) => {

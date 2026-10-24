@@ -1,6 +1,11 @@
-const SignUp = () => {
-  return  (
-    <p className="sign-up-button">Sign Up</p>
+const SignUp = ({ setDisplaySignUp }) => {
+  const handleDisplaySignUp = () => {
+    setDisplaySignUp(true);
+  };
+  return (
+    <p className="sign-up-button" onClick={handleDisplaySignUp}>
+      Sign Up
+    </p>
   );
 };
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateField } from "../../services/validation";
 import { invalid, valid } from "../../assets";
 
@@ -9,43 +9,36 @@ const FormField = ({
   formData,
   setFormData,
   errorMessage,
+  setIsInvalid,
 }) => {
-  let isValid = validateField(name,formData[name], formData.password, )
+  let isValid = validateField(name, formData[name], formData.password);
   let warning = formData[name].length > 0 && !isValid;
+  const hasServerError = errorMessage[name]?.length > 0;
+  const isInvalid = warning || hasServerError;
   const result = name.replaceAll("_", " ");
   const label = result.charAt(0).toUpperCase() + result.slice(1);
 
+  useEffect(() => {
+    setIsInvalid((prev) => ({
+      ...prev,
+      [name]: isInvalid,
+    }));
+  }, [name, isInvalid, setIsInvalid]);
+
   const returnError = (name) => {
- 
     if (!isValid && formData[name].length > 0) {
       switch (name) {
         case "username":
-          return (
-            <p className="field-error">
-              must be at least 3 characters.
-            </p>
-          );
+          return <p className="field-error">must be at least 3 characters.</p>;
 
         case "email":
-          return (
-            <p className="field-error">
-              must be a valid email address.
-            </p>
-          );
+          return <p className="field-error">must be a valid email address.</p>;
 
         case "password":
-          return (
-            <p className="field-error">
-              must be at least 3 characters.
-            </p>
-          );
+          return <p className="field-error">must be at least 3 characters.</p>;
 
         case "password_confirmation":
-          return (
-            <p className="field-error">
-              Passwords do not match
-            </p>
-          );
+          return <p className="field-error">Passwords do not match</p>;
 
         default:
           return null;
@@ -69,8 +62,8 @@ const FormField = ({
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((perv) => ({
-      ...perv,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
@@ -78,7 +71,9 @@ const FormField = ({
   return (
     <div className="form-field">
       <label htmlFor={name}>{label}</label>
-      <div className={warning ? " field-input invalid-border" : "field-input"}>
+      <div
+        className={isInvalid ? " field-input invalid-border" : "field-input"}
+      >
         <input
           type={type}
           placeholder={placeholder}
@@ -89,7 +84,7 @@ const FormField = ({
         />
         {formData[name].length > 0 ? (
           <img
-            src={warning ? invalid : valid}
+            src={isInvalid ? invalid : valid}
             className="search-icon"
             alt="Search"
           />

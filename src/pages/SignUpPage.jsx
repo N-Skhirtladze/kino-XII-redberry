@@ -1,14 +1,25 @@
 import { useState } from "react";
 import { close } from "../assets";
 import FormField from "../components/ui/FormField";
+import AvatarUpload from "../components/ui/AvatarUpload";
+import { signUp } from "../services/auth";
 
 const SignUpPage = ({ setDisplaySignUp }) => {
+  const [avatar, setAvatar] = useState(null);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     password_confirmation: "",
   });
+  const [errorMessage, setErrorMessage] = useState({});
+  const [isInvalid, setIsInvalid] = useState({
+    username: true,
+    email: true,
+    password: true,
+    password_confirmation: true,
+  });
+  const isFormInvalid = Object.values(isInvalid).some(Boolean);
 
   const handleDisplaySignUp = (e) => {
     if (e.target.className === "sign-up-page") {
@@ -17,6 +28,37 @@ const SignUpPage = ({ setDisplaySignUp }) => {
     if (e.target.className === "close-form") {
       setDisplaySignUp(false);
     }
+  };
+
+  const onSubmit = (data) => {
+    if (isFormInvalid) {
+      return;
+    }
+    const formData = new FormData();
+
+    formData.append("username", data.username);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("password_confirmation", data.password_confirmation);
+    if (avatar) {
+      formData.append("avatar", avatar);
+    }
+
+    const createNewUser = async (data) => {
+      try {
+        const newUser = await signUp(data);
+
+        if (!newUser.ok) {
+          setErrorMessage(newUser.data);
+          return;
+        }
+        setDisplaySignUp(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    createNewUser(formData);
   };
   return (
     <div className="sign-up-page" onClick={handleDisplaySignUp}>
@@ -27,10 +69,7 @@ const SignUpPage = ({ setDisplaySignUp }) => {
         </div>
         <p className="welcome-text">Welcome to Kino XII</p>
         <form id="sign-up-form" action="">
-          {/* upload avatar */}
-          {/* <div className="sign-up-avatar">
-            <label htmlFor=""></label>
-          </div> */}
+          <AvatarUpload avatar={avatar} setAvatar={setAvatar} />
 
           <div className="username-field">
             <FormField
@@ -39,7 +78,8 @@ const SignUpPage = ({ setDisplaySignUp }) => {
               name={"username"}
               formData={formData}
               setFormData={setFormData}
-              errorMessage={{}}
+              errorMessage={errorMessage}
+              setIsInvalid={setIsInvalid}
             />
           </div>
           <div className="email-field">
@@ -49,7 +89,8 @@ const SignUpPage = ({ setDisplaySignUp }) => {
               name={"email"}
               formData={formData}
               setFormData={setFormData}
-              errorMessage={{}}
+              errorMessage={errorMessage}
+              setIsInvalid={setIsInvalid}
             />
           </div>
           <div className="passwords-fields">
@@ -60,7 +101,8 @@ const SignUpPage = ({ setDisplaySignUp }) => {
                 name={"password"}
                 formData={formData}
                 setFormData={setFormData}
-                errorMessage={[]}
+                errorMessage={errorMessage}
+                setIsInvalid={setIsInvalid}
               />
             </div>
             <div className="password_confirmation">
@@ -70,12 +112,28 @@ const SignUpPage = ({ setDisplaySignUp }) => {
                 name={"password_confirmation"}
                 formData={formData}
                 setFormData={setFormData}
-                errorMessage={{}}
+                errorMessage={errorMessage}
+                setIsInvalid={setIsInvalid}
               />
             </div>
           </div>
         </form>
-        <button className="submit-sign-up">Sign Up</button>
+        <button
+          type="button"
+          className={
+            isInvalid.username ||
+            isInvalid.email ||
+            isInvalid.password ||
+            isInvalid.password_confirmation ||
+            formData.password_confirmation === ""
+              ? "submit-sign-up"
+              : "valid-submit-sign-up submit-sign-up"
+          }
+          disabled={isFormInvalid}
+          onClick={() => onSubmit(formData)}
+        >
+          Sign Up
+        </button>
         <p className="registration-links">
           Already have an account?
           <span

@@ -6,7 +6,7 @@ import { useState } from "react";
 import SignUpPage from "../../pages/SignUpPage";
 
 const Header = () => {
-  const [displaySignUp, setDisplaySignUp] = useState(true);
+  const [displaySignUp, setDisplaySignUp] = useState(false);
 
   return (
     <>

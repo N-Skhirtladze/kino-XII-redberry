@@ -1,6 +1,11 @@
-const LogIn = () => {
+const LogIn = ({ setDisplayLogIn}) => {
+
+  const handleDisplayLogIn = () => {
+    setDisplayLogIn(true);
+  }
+
   return (
-    <p className="log-in-button">Log In</p>
+    <p className="log-in-button" onClick={handleDisplayLogIn}>Log In</p>
   );
 };
 

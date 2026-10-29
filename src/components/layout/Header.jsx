@@ -4,9 +4,11 @@ import SignUp from "../ui/buttons/SignUp";
 import LogIn from "../ui/buttons/LogIn";
 import { useState } from "react";
 import SignUpPage from "../../pages/SignUpPage";
+import LogInPage from "../../pages/LogInPage";
 
 const Header = () => {
   const [displaySignUp, setDisplaySignUp] = useState(false);
+  const [displayLogIn, setDisplayLogIn] = useState(true);
 
   return (
     <>
@@ -19,11 +21,12 @@ const Header = () => {
           <SearchBar />
           <div className="header-buttons">
             <SignUp setDisplaySignUp={setDisplaySignUp} />
-            <LogIn />
+            <LogIn setDisplayLogIn={setDisplayLogIn} />
           </div>
         </div>
       </header>
       {displaySignUp && <SignUpPage setDisplaySignUp={setDisplaySignUp}/>}
+      {displayLogIn && <LogInPage setDisplayLogIn={setDisplayLogIn} />}
     </>
   );
 };

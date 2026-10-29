@@ -121,10 +121,7 @@ const SignUpPage = ({ setDisplaySignUp }) => {
         <button
           type="button"
           className={
-            isInvalid.username ||
-            isInvalid.email ||
-            isInvalid.password ||
-            isInvalid.password_confirmation ||
+            isFormInvalid ||
             formData.password_confirmation === ""
               ? "submit-sign-up"
               : "valid-submit-sign-up submit-sign-up"

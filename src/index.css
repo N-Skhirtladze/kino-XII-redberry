@@ -858,7 +858,7 @@ header {
   font-size: 12px;
   font-weight: 600;
 }
-
+.log-in-page,
 .sign-up-page {
   position: fixed;
   top: 0;
@@ -873,12 +873,20 @@ header {
   justify-content: center;
 }
 
+.log-in-container,
 .sign-up-container {
   width: 475px;
-  min-height: 558px;
   background-color: #070c1c;
   border-radius: 28px;
   padding: 32px;
+}
+
+.sign-up-container {
+  min-height: 558px;
+}
+
+.log-in-container {
+  min-height: 400px;
 }
 
 .registration-header {
@@ -904,12 +912,14 @@ header {
   font-weight: 400;
 }
 
+#log-in-form,
 #sign-up-form {
   width: 100%;
   max-height: 409px;
   margin-top: 24px;
 }
 
+.submit-log-in,
 .submit-sign-up {
   border: none;
   width: 100%;
@@ -923,11 +933,11 @@ header {
   cursor: not-allowed;
 }
 
-.submit-sign-up:disabled {
+.submit-log-in:disabled .submit-sign-up:disabled {
   cursor: not-allowed;
   opacity: 0.6;
 }
-
+.valid-submit-log-in,
 .valid-submit-sign-up {
   cursor: pointer;
   background-color: #ec3013;

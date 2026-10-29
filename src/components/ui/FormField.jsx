@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { validateField } from "../../services/validation";
 import { invalid, valid } from "../../assets";
 
@@ -21,9 +21,9 @@ const FormField = ({
   useEffect(() => {
     setIsInvalid((prev) => ({
       ...prev,
-      [name]: isInvalid,
+      [name]: !isValid || hasServerError,
     }));
-  }, [name, isInvalid, setIsInvalid]);
+  }, [name, isInvalid, setIsInvalid, hasServerError]);
 
   const returnError = (name) => {
     if (!isValid && formData[name].length > 0) {
@@ -49,6 +49,7 @@ const FormField = ({
       switch (name) {
         case "username":
         case "email":
+        case "password":
           return <p className="field-error">{errorMessage[name][0]}</p>;
 
         default:
@@ -64,13 +65,13 @@ const FormField = ({
 
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value.replace(/\s/g, ""),
     }));
   };
 
   return (
     <div className="form-field">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} style={{color: isInvalid ? "#ec3013" : "#ffffff"}}>{label}</label>
       <div
         className={isInvalid ? " field-input invalid-border" : "field-input"}
       >

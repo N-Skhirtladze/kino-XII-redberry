@@ -8,14 +8,14 @@ import LogInPage from "../../pages/LogInPage";
 
 const Header = () => {
   const [displaySignUp, setDisplaySignUp] = useState(false);
-  const [displayLogIn, setDisplayLogIn] = useState(true);
+  const [displayLogIn, setDisplayLogIn] = useState(false);
 
   return (
     <>
       <header>
         <div className="header-left">
           <Logo />
-          <p className="sessions">Sessions</p>
+          <p className="sessions">SESSIONS</p>
         </div>
         <div className="header-right">
           <SearchBar />

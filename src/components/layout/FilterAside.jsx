@@ -1,6 +1,7 @@
 // src/components/layout/FilterAside.jsx
 import { use, useEffect, useState } from "react";
 import FilterOption from "../ui/FilterOption";
+import DateFilter from "../ui/DateFilter";
 
 const FilterAside = () => {
   const [filterOptions, setFilterOptions] = useState({
@@ -12,6 +13,7 @@ const FilterAside = () => {
   const [selectedObject, setSelectedObject] = useState({});
   const [activeFilters, setActiveFilter] = useState(0);
   const [clearFilters, setClearFilters] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const fetchFilterOptions = async () => {
@@ -38,6 +40,7 @@ const FilterAside = () => {
     setSelectedObject({});
     setActiveFilter(0);
     setClearFilters(true);
+    setSelectedDate(null);
   };
 
   const renderOption = (option) => (
@@ -59,6 +62,9 @@ const FilterAside = () => {
       <h2>Filters</h2>
       <div className="filter-options">
         {Object.keys(filterOptions).map(renderOption)}
+        <DateFilter selectedObject={selectedObject} setSelectedObject={setSelectedObject} activeFilters={activeFilters} setActiveFilter={setActiveFilter} clearFilters={clearFilters} setClearFilters={setClearFilters} setSelectedDate={setSelectedDate} selectedDate={selectedDate} /> 
+
+
       </div>
       {activeFilters > 0 && (<button onClick={handleClearFilters} >Clear Filters</button>)}
       

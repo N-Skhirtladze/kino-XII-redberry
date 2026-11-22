@@ -3,14 +3,13 @@ import { use, useEffect, useState } from "react";
 import FilterOption from "../ui/FilterOption";
 import DateFilter from "../ui/DateFilter";
 
-const FilterAside = () => {
-  const [filterOptions, setFilterOptions] = useState({
-    venues: [],
-    formats: [],
-    languages: [],
-    bands: [],
-  });
-  const [selectedObject, setSelectedObject] = useState({});
+const FilterAside = ({
+  selectedObject,
+  setSelectedObject,
+  filterOptions,
+  setFilterOptions,
+  setSortOptions,
+}) => {
   const [activeFilters, setActiveFilter] = useState(0);
   const [clearFilters, setClearFilters] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -28,6 +27,7 @@ const FilterAside = () => {
           languages: data.data.languages,
           bands: data.data.timeBands,
         });
+        setSortOptions(data.data.sortOptions);
       } catch (error) {
         console.error("Error fetching filter options:", error);
       }
@@ -62,13 +62,27 @@ const FilterAside = () => {
       <h2>Filters</h2>
       <div className="filter-options">
         {Object.keys(filterOptions).map(renderOption)}
-        <DateFilter selectedObject={selectedObject} setSelectedObject={setSelectedObject} activeFilters={activeFilters} setActiveFilter={setActiveFilter} clearFilters={clearFilters} setClearFilters={setClearFilters} setSelectedDate={setSelectedDate} selectedDate={selectedDate} /> 
-
-
+        <DateFilter
+          selectedObject={selectedObject}
+          setSelectedObject={setSelectedObject}
+          activeFilters={activeFilters}
+          setActiveFilter={setActiveFilter}
+          clearFilters={clearFilters}
+          setClearFilters={setClearFilters}
+          setSelectedDate={setSelectedDate}
+          selectedDate={selectedDate}
+        />
       </div>
-      {activeFilters > 0 && (<button onClick={handleClearFilters} >Clear Filters</button>)}
-      
-      <p className="filter-count" style={{marginTop: activeFilters > 0 ? "12px" : "67px"}}>{activeFilters} filters active</p>
+      {activeFilters > 0 && (
+        <button onClick={handleClearFilters}>Clear Filters</button>
+      )}
+
+      <p
+        className="filter-count"
+        style={{ marginTop: activeFilters > 0 ? "12px" : "67px" }}
+      >
+        {activeFilters} filters active
+      </p>
     </aside>
   );
 };

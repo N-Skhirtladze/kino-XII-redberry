@@ -66,7 +66,6 @@ const DateFilter = ({
                 <input
                   type="radio"
                   name="date"
-                  checked={selectedDate?.getTime() === date.getTime()}
                   onChange={() => handleDateChange(date)}
                 />
                 <span className="week-day">{weekday}</span>
